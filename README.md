@@ -75,7 +75,7 @@ Run `flutter pub get` to download and install the package.
 
 ### Android repositories
 
-The plugin adds the Fingerprint Maven repository to your Gradle project. If your `settings.gradle.kts` sets `repositoriesMode` to `PREFER_SETTINGS` or `FAIL_ON_PROJECT_REPOS`, Gradle ignores or rejects it, so declare it yourself ([Gradle docs](https://docs.gradle.org/current/userguide/centralizing_repositories.html)):
+The plugin adds the Fingerprint Maven repository to your Gradle project. If your `settings.gradle.kts` sets `repositoriesMode` to `PREFER_SETTINGS`, Gradle ignores it ([Gradle docs](https://docs.gradle.org/current/userguide/centralizing_repositories.html)). Declare it next to the Flutter engine repository you already added there:
 
 ```kotlin
 dependencyResolutionManagement {
