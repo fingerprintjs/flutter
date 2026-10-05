@@ -5,10 +5,6 @@
     "fingerprint_flutter": "4.13.1"
   },
   "changesets": [
-    "android-release-r8-rules",
-    "drop-jitpack-repo",
-    "native-background-queue",
-    "v5-api-migration",
-    "validate-endpoints"
+    "v5-api-migration"
   ]
 }
