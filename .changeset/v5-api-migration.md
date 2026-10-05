@@ -7,7 +7,7 @@ Migrated the SDK to Fingerprint API v4. This is a breaking change on every platf
 **Requirements**
 
 - Flutter 3.44.0 and Dart 3.12.0.
-- Android 7.0 (API 24+). Native SDK 4.1.x. The plugin no longer applies the Kotlin Gradle plugin, so it builds under AGP 9. Apps on AGP 8 need Kotlin Gradle plugin 2.2.20 or newer.
+- Android 7.0 (API 24+). Native SDK 4.1.x. The plugin no longer applies the Kotlin Gradle plugin, so it builds under AGP 9. Apps on AGP 8 need Kotlin Gradle plugin 2.2.20 or newer. The plugin no longer adds the `jitpack.io` repository. If your app uses JitPack dependencies, declare the repository yourself.
 - iOS 15 / tvOS 15, Xcode 16, Swift 6. Native SDK 4.1.x (`Fingerprint-iOS`).
 - Only native patch releases are picked up automatically.
 - Web uses the bundled `@fingerprint/agent` v4. There is no extra npm peer dependency.
@@ -28,10 +28,12 @@ Migrated the SDK to Fingerprint API v4. This is a breaking change on every platf
 
 - `package:fingerprint_flutter/fingerprint_flutter.dart` is the only public import. `error.dart`, `result.dart`, and `region.dart` are gone. `pluginVersion` is renamed to `fingerprintFlutterVersion`. `Region.stringValue` is removed, use `Region.name`.
 - Static `FpjsProPlugin.initFpjs` / `getVisitorId` / `getVisitorData` are replaced by an instance `Fingerprint` client with `get({tags, linkedId, timeout})`.
-- The constructor is synchronous and starts the client. Identification failures surface on `get`. On Android and iOS, the constructor throws `FlutterError` if the Flutter binding does not exist yet, so call `WidgetsFlutterBinding.ensureInitialized()` first, as with `initFpjs`.
+- The constructor is synchronous and starts the client. Identification failures surface on `get`. On Android and iOS:
+  - The native client is created and `get` starts on a background thread, so creating the client at app startup does not block the UI thread.
+  - The constructor throws `FlutterError` if the Flutter binding does not exist yet, so call `WidgetsFlutterBinding.ensureInitialized()` first, as with `initFpjs`.
 - Timeouts are `Duration`. `endpoint` + `endpointFallbacks` become one `endpoints` list. Platform options nest under `android`, `ios`, and `web`.
 - `scriptUrlPattern`, `scriptUrlPatternFallbacks`, and `extendedResponseFormat` are removed.
-- `tags` must be JSON-compatible (string keys, finite numbers, no typed lists). `get` throws `ArgumentError` right away for invalid `tags` or a `timeout` under 1 ms, before identifying. The constructor throws `ArgumentError` for an `android.locationTimeout` under 1 ms.
+- `tags` must be JSON-compatible (string keys, finite numbers, no typed lists). `get` throws `ArgumentError` right away for invalid `tags` or a `timeout` under 1 ms, before identifying. The constructor throws `ArgumentError` for an `endpoints` entry that is not an `http` or `https` URL, or an `android.locationTimeout` under 1 ms.
 - Custom `endpoints` still get no automatic fallback on any platform, even though JS agent v4 adds one by default. List the [regional default URL](https://docs.fingerprint.com/docs/regions) last if you want it.
 - On Android and iOS, `region` still defaults to `Region.us`. Set it for EU and AP workspaces.
 
@@ -84,7 +86,7 @@ Migrated the SDK to Fingerprint API v4. This is a breaking change on every platf
 
 - `FingerprintResult`: `eventId`, `visitorId?`, `suspectScore?`, `sealedResult?`, `cacheHit?` (web only).
 - `requestId` is now `eventId`. `confidence` / `confidenceScore` and the extended types (`ipLocation`, `firstSeenAt`, and the rest) are gone.
-- `visitorId` is null when hidden ([Zero Trust](https://dev.fingerprint.com/docs/zero-trust-mode)).
+- `visitorId` is null when hidden ([Zero Trust](https://docs.fingerprint.com/docs/zero-trust-mode)).
 
 **Errors**
 
