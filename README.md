@@ -28,6 +28,7 @@ This package replaces `fpjs_pro_plugin`. If you are upgrading from 4.x, see the 
   - [Requirements](#requirements)
   - [Dependencies](#dependencies)
   - [How to install](#how-to-install)
+    - [Android repositories](#android-repositories)
     - [Web platform (Optional)](#web-platform-optional)
   - [Usage](#usage)
     - [1. Create a client](#1-create-a-client)
@@ -71,6 +72,18 @@ dependencies:
 ```
 
 Run `flutter pub get` to download and install the package.
+
+### Android repositories
+
+The plugin adds the Fingerprint Maven repository to your Gradle project. If your `settings.gradle.kts` sets `repositoriesMode` to `PREFER_SETTINGS` or `FAIL_ON_PROJECT_REPOS`, Gradle ignores or rejects it, so declare it yourself ([Gradle docs](https://docs.gradle.org/current/userguide/centralizing_repositories.html)):
+
+```kotlin
+dependencyResolutionManagement {
+    repositories {
+        maven("https://maven.fpregistry.io/releases")
+    }
+}
+```
 
 ### Web platform (Optional)
 
