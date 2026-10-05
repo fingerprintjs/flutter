@@ -5,13 +5,12 @@
 ### Patch Changes
 
 - Android: fix R8 release builds failing with "Missing class com.google.android.gms..." and crashing on startup with `IllegalAccessError` on AGP 9.1. ([e656f7a](https://github.com/fingerprintjs/flutter/commit/e656f7a98bfcd8505cee24b5f1c88fa30399cdc8))
+- The `Fingerprint` constructor throws `ArgumentError` for an `endpoints` entry that is not an `http` or `https` URL. Before, it failed at `get`, differently on each platform. ([e51e064](https://github.com/fingerprintjs/flutter/commit/e51e064b6f4f030fcba95370deb0c09a947e3577))
 
 ### Supported Native SDK Version Range
 
 - Fingerprint iOS SDK Version Range: **`>= 4.1.0 and < 4.2.0`**
 - Fingerprint Android SDK Version Range: **`>= 4.1.0 and < 4.2.0`**
-
-* The `Fingerprint` constructor throws `ArgumentError` for an `endpoints` entry that is not an `http` or `https` URL. Before, it failed at `get`, differently on each platform. ([e51e064](https://github.com/fingerprintjs/flutter/commit/e51e064b6f4f030fcba95370deb0c09a947e3577))
 
 ## 5.0.0-test.0
 
@@ -122,22 +121,22 @@
 
   Caching is off unless you pass `web: WebOptions(cache: ...)`.
 
-  ````diff
+  ```diff
   - <script src="assets/packages/fpjs_pro_plugin/web/index.js" defer></script>
   + <script src="assets/packages/fingerprint_flutter/web/index.js" defer></script>
-  ``` ([f680434](https://github.com/fingerprintjs/flutter/commit/f680434344af66f78c86c3fad94651625097e255))
-  ````
+  ```
+
+  ([f680434](https://github.com/fingerprintjs/flutter/commit/f680434344af66f78c86c3fad94651625097e255))
 
 ### Patch Changes
 
 - Android: the plugin no longer adds the `jitpack.io` repository to your Gradle project. If your app uses JitPack dependencies, declare the repository yourself. ([f680434](https://github.com/fingerprintjs/flutter/commit/f680434344af66f78c86c3fad94651625097e255))
+- Android and iOS: create the native client and start `get` on a background thread, not the main thread. Creating the client at app startup no longer blocks the UI thread. ([f680434](https://github.com/fingerprintjs/flutter/commit/f680434344af66f78c86c3fad94651625097e255))
 
 ### Supported Native SDK Version Range
 
 - Fingerprint iOS SDK Version Range: **`>= 4.1.0 and < 4.2.0`**
 - Fingerprint Android SDK Version Range: **`>= 4.1.0 and < 4.2.0`**
-
-* Android and iOS: create the native client and start `get` on a background thread, not the main thread. Creating the client at app startup no longer blocks the UI thread. ([f680434](https://github.com/fingerprintjs/flutter/commit/f680434344af66f78c86c3fad94651625097e255))
 
 ## 4.13.1
 
