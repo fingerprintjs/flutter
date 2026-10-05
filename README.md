@@ -29,6 +29,7 @@ application. The plugin allows you to call the underlying native Fingerprint age
   - [Requirements](#requirements)
   - [Dependencies](#dependencies)
   - [How to install](#how-to-install)
+    - [Android repositories](#android-repositories)
     - [Web platform (Optional)](#web-platform-optional)
   - [Usage](#usage)
     - [1. Create a client](#1-create-a-client)
@@ -72,6 +73,18 @@ dependencies:
 ```
 
 Run `flutter pub get` to download and install the package.
+
+### Android repositories
+
+The plugin adds the Fingerprint Maven repository to your Gradle project. If your `settings.gradle.kts` sets `repositoriesMode` to `PREFER_SETTINGS`, Gradle ignores it ([Gradle docs](https://docs.gradle.org/current/userguide/centralizing_repositories.html)). Declare it next to the Flutter engine repository you already added there:
+
+```kotlin
+dependencyResolutionManagement {
+    repositories {
+        maven("https://maven.fpregistry.io/releases")
+    }
+}
+```
 
 ### Web platform (Optional)
 
