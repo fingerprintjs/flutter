@@ -56,8 +56,8 @@ flutter run -d chrome --web-port 3000
 
 For running the project in iOS or Android, you will need to have a physical device or an emulator running. See the Flutter documentation for more information: 
 
-* [Configure iOS development (MacOS)](https://docs.flutter.dev/get-started/install/macos/mobile-ios)
-* [Configure Android development (MacOS)](https://docs.flutter.dev/get-started/install/macos/mobile-android)
-* [Configure Android development (Windows)](https://docs.flutter.dev/get-started/install/windows/mobile)
+* [Configure iOS development (MacOS)](https://docs.flutter.dev/platform-integration/ios/setup)
+* [Configure Android development (MacOS)](https://docs.flutter.dev/platform-integration/android/setup)
+* [Configure Android development (Windows)](https://docs.flutter.dev/platform-integration/android/setup)
 
 For the integration smoke test, see [contributing.md](../contributing.md#integration-smoke-test).
