@@ -1,4 +1,4 @@
-# Stopgap for gaps in Fingerprint Android SDK 4.1.x consumer rules. Remove once the SDK ships them.
+# Stopgap for gaps in Fingerprint Android SDK 4.1.x and 4.2.x consumer rules. Remove once the SDK ships them.
 # https://developer.android.com/build/shrink-code#configuration-files
 
 # The SDK references Play Services location without depending on it. R8 fails with "Missing class".
