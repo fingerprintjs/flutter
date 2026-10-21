@@ -1,24 +1,25 @@
 package com.fingerprint.flutter
 
-import com.fingerprint.android.ApiKeyRequired
+import com.fingerprint.android.ApiKeyNotFound
 import com.fingerprint.android.StateNotReady
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
 
+// Error types here must load on the desktop JVM, see FingerprintHostApiImplTest.
 class FingerprintNativeErrorTest {
   @Test
   fun stripsUnknownEventIdAndDescription() {
-    val flutterError = toFlutterError(ApiKeyRequired("Unknown", "Unknown"))
-    assertEquals("public_api_key_required", flutterError.code)
+    val flutterError = toFlutterError(ApiKeyNotFound("Unknown", "Unknown"))
+    assertEquals("public_api_key_not_found", flutterError.code)
     assertNull(flutterError.message)
     assertNull(flutterError.details)
   }
 
   @Test
   fun keepsRealEventIdInDetails() {
-    val flutterError = toFlutterError(ApiKeyRequired("evt-123", "need key"))
-    assertEquals("public_api_key_required", flutterError.code)
+    val flutterError = toFlutterError(ApiKeyNotFound("evt-123", "need key"))
+    assertEquals("public_api_key_not_found", flutterError.code)
     assertEquals("need key", flutterError.message)
     assertEquals("evt-123", flutterError.details)
   }
