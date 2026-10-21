@@ -1,5 +1,16 @@
 # Fingerprint Flutter
 
+## 5.1.0
+
+### Minor Changes
+
+- Android and iOS: use native Fingerprint SDK 4.2.x. It collects new signals and improves performance. On Android, it also returns an error instead of crashing when SDK initialization fails. ([ce08314](https://github.com/fingerprintjs/flutter/commit/ce083149adf2857ab0947bea23fdfc0aab6ed224))
+
+### Supported Native SDK Version Range
+
+- Fingerprint iOS SDK Version Range: **`>= 4.2.0 and < 4.3.0`**
+- Fingerprint Android SDK Version Range: **`>= 4.2.0 and < 4.3.0`**
+
 ## 5.0.0
 
 ### Major Changes

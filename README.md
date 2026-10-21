@@ -69,7 +69,7 @@ dependencies:
   flutter:
     sdk: flutter
   ...
-  fingerprint_flutter: ^5.0.0
+  fingerprint_flutter: ^5.1.0
 ```
 
 Run `flutter pub get` to download and install the package.
