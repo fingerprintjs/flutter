@@ -2,6 +2,7 @@ package com.fingerprint.flutter
 
 import android.content.Context
 import com.fingerprint.android.ApiKeyNotFound
+import com.fingerprint.android.ClientTimeout
 import com.fingerprint.android.Failed
 import com.fingerprint.android.Fingerprint
 import com.fingerprint.android.FingerprintResponse
@@ -27,6 +28,7 @@ class FingerprintHostApiImplTest {
       Failed("e2", "fail") to "failed",
       RequestTimeout("e3", "timeout") to "request_read_timeout",
       NetworkUnavailableError() to "network_error",
+      ClientTimeout() to "client_timeout",
     )
     for ((nativeError, expectedCode) in cases) {
       val api = hostApi { _, _ ->
