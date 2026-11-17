@@ -2,6 +2,9 @@ import 'dart:convert';
 
 import 'package:env_flutter/env_flutter.dart';
 import 'package:flutter/foundation.dart';
+// Deprecated since Flutter 3.47. The replacement, package:material_ui, needs
+// Flutter >= 3.47, above our minimum. https://pub.dev/packages/material_ui
+// ignore: deprecated_member_use
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:fingerprint_flutter/fingerprint_flutter.dart';
