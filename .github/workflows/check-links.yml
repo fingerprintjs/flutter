@@ -1,0 +1,27 @@
+name: Check links
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  links:
+    name: Check links
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # Generated files (CHANGELOG.md, web/index.js) are left out.
+      # Dart sources are not covered, the checker doesn't support .dart.
+      - name: Check links
+        uses: fingerprintjs/docs-link-checker@b8f0822d9a3f8e4a6325f899b3080a3244fa4a71 # main 2026-11-16
+        with:
+          files: |
+            README.md
+            contributing.md
+            example/README.md
+            web/rollup.config.js
