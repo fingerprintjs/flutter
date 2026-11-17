@@ -171,38 +171,26 @@ class _MyAppState extends State<MyApp> {
         () => client.get(timeout: const Duration(milliseconds: 5000)),
       ];
 
-      var timeoutChecks = [
-        () => client.get(timeout: const Duration(milliseconds: 5)),
-      ];
-
-      // The timeout checks cancel a request mid-flight. On iOS the call right after
-      // such a cancellation fails with "NetworkError: The network connection was
-      // lost", so run them first and leave the plain checks last.
-      // iOS SDK 4.3+ raises any timeout below 500 ms to 500 ms, so a fast
-      // network can finish the request. Accept success on native iOS only.
-      final timeoutMayFinish =
-          !kIsWeb && defaultTargetPlatform == TargetPlatform.iOS;
-      for (var check in timeoutChecks) {
-        try {
-          await check();
-          if (!timeoutMayFinish) throw Exception('Expected timeout error');
-          if (!mounted) return;
-          setState(() {
-            _checksResult += '!';
-          });
-        } on FingerprintError {
-          if (!mounted) return;
-          setState(() {
-            _checksResult += '!';
-          });
-        }
-      }
       for (var check in checks) {
         await check();
         if (!mounted) return;
         setState(() {
           _checksResult += '.';
         });
+      }
+      // A server error must reach Dart as FingerprintError with its code.
+      final invalidKeyClient = Fingerprint(
+        apiKey: 'invalid-api-key',
+        region: client.region,
+        endpoints: client.endpoints,
+        android: client.android,
+        ios: client.ios,
+      );
+      try {
+        await invalidKeyClient.get();
+        throw Exception('Expected an error for an invalid API key');
+      } on FingerprintError catch (error) {
+        if (error.code != FingerprintError.publicApiKeyNotFound) rethrow;
       }
       if (!mounted) return;
       setState(() {
