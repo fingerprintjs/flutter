@@ -179,10 +179,13 @@ class _MyAppState extends State<MyApp> {
       // such a cancellation fails with "NetworkError: The network connection was
       // lost", so run them first and leave the plain checks last.
       // iOS SDK 4.3+ raises any timeout below 500 ms to 500 ms, so a fast
-      // network can finish the request. Accept success or a FingerprintError.
+      // network can finish the request. Accept success on native iOS only.
+      final timeoutMayFinish =
+          !kIsWeb && defaultTargetPlatform == TargetPlatform.iOS;
       for (var check in timeoutChecks) {
         try {
           await check();
+          if (!timeoutMayFinish) throw Exception('Expected timeout error');
           if (!mounted) return;
           setState(() {
             _checksResult += '!';
