@@ -179,10 +179,11 @@ class _MyAppState extends State<MyApp> {
         });
       }
       // A server error must reach Dart as FingerprintError with its code.
+      // Default endpoints: on web a proxy can fail the agent script load
+      // instead, which gives script_load_fail.
       final invalidKeyClient = Fingerprint(
         apiKey: 'invalid-api-key',
         region: client.region,
-        endpoints: client.endpoints,
         android: client.android,
         ios: client.ios,
       );
