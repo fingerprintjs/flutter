@@ -1,6 +1,9 @@
 // Example app startup states. Identification itself runs in the Maestro flows
 // in example/maestro.
 import 'package:env_flutter/env_flutter.dart';
+// Deprecated since Flutter 3.47. The replacement, package:material_ui, needs
+// Flutter >= 3.47, above our minimum. https://pub.dev/packages/material_ui
+// ignore: deprecated_member_use
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fingerprint_flutter_example/main.dart';
