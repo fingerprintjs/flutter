@@ -97,7 +97,8 @@ class Fingerprint {
   /// https://docs.fingerprint.com/docs/tagging-information
   ///
   /// [timeout] must be at least 1 millisecond. Null uses the platform
-  /// default.
+  /// default. On iOS, timeouts below 500 milliseconds are raised to
+  /// 500 milliseconds.
   Future<FingerprintResult> get({
     Map<String, Object?>? tags,
     String? linkedId,
