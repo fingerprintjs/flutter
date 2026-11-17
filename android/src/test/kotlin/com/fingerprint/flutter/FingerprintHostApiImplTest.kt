@@ -22,7 +22,7 @@ class FingerprintHostApiImplTest {
       // Some SDK error classes throw IllegalAccessError when created on the
       // desktop JVM (works on ART). The SDK obfuscator breaks their static
       // initializer, and which classes it breaks changes with each release.
-      // These load on SDK 4.1.0 and 4.2.0.
+      // These load on SDK 4.1.0, 4.2.0 and 4.3.0.
       ApiKeyNotFound("e1", "msg") to "public_api_key_not_found",
       Failed("e2", "fail") to "failed",
       RequestTimeout("e3", "timeout") to "request_read_timeout",
