@@ -1,5 +1,16 @@
 # Fingerprint Flutter
 
+## 5.2.0
+
+### Minor Changes
+
+- Android and iOS: use native Fingerprint SDK 4.3.x. On iOS, a `timeout` below 500 ms is now raised to 500 ms. ([7ac7bb9](https://github.com/fingerprintjs/flutter/commit/7ac7bb90421029cb16e1bb0a0dcf9e8765ec03aa))
+
+### Supported Native SDK Version Range
+
+- Fingerprint iOS SDK Version Range: **`>= 4.3.0 and < 4.4.0`**
+- Fingerprint Android SDK Version Range: **`>= 4.3.0 and < 4.4.0`**
+
 ## 5.1.0
 
 ### Minor Changes
