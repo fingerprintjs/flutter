@@ -171,30 +171,25 @@ class _MyAppState extends State<MyApp> {
         () => client.get(timeout: const Duration(milliseconds: 5000)),
       ];
 
-      var timeoutChecks = [
-        () => client.get(timeout: const Duration(milliseconds: 5)),
-      ];
-
-      // The timeout checks cancel a request mid-flight. On iOS the call right after
-      // such a cancellation fails with "NetworkError: The network connection was
-      // lost", so run them first and leave the plain checks last.
-      for (var check in timeoutChecks) {
-        try {
-          await check();
-          throw Exception('Expected timeout error');
-        } on FingerprintError {
-          if (!mounted) return;
-          setState(() {
-            _checksResult += '!';
-          });
-        }
-      }
       for (var check in checks) {
         await check();
         if (!mounted) return;
         setState(() {
           _checksResult += '.';
         });
+      }
+      // Keep the key letters only and the default endpoints. On web, a key
+      // with hyphens or a proxy fails the script load (script_load_fail).
+      final invalidKeyClient = Fingerprint(
+        apiKey: 'invalidApiKey',
+        android: client.android,
+        ios: client.ios,
+      );
+      try {
+        await invalidKeyClient.get();
+        throw Exception('Expected an error for an invalid API key');
+      } on FingerprintError catch (error) {
+        if (error.code != FingerprintError.publicApiKeyNotFound) rethrow;
       }
       if (!mounted) return;
       setState(() {

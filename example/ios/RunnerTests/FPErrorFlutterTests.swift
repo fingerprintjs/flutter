@@ -22,6 +22,11 @@ struct FPErrorFlutterTests {
     #expect(fields.eventId == "event-id")
   }
 
+  @Test
+  func mapsClientTimeout() {
+    #expect(FPError.clientTimeout.pigeonFields().code == "client_timeout")
+  }
+
   // Literal server strings, not APIError.Code.rawValue, so this fails if the
   // plugin stops forwarding the server's code as is.
   @Test(arguments: [
