@@ -21,7 +21,7 @@ identification and device intelligence with industry-leading accuracy. Fingerpri
 application. The plugin allows you to call the underlying native Fingerprint agents (Android, iOS, and Web) and identify devices.
 
 > [!IMPORTANT]
-> This package replaces `fpjs_pro_plugin`. Upgrading from 4.x? See the [5.0.0 release notes](https://github.com/fingerprintjs/flutter/blob/main/CHANGELOG.md#500) for the migration guide.
+> This package replaces `fpjs_pro_plugin`. Upgrading from 4.x? See the [5.0.0 release notes](./CHANGELOG.md#500) for the migration guide.
 
 ## Table of contents
 - [Fingerprint Flutter](#fingerprint-flutter)
@@ -261,4 +261,4 @@ email us at `oss-support@fingerprint.com`.
 
 ## License
 
-This project is licensed under the [MIT license](https://github.com/fingerprintjs/flutter/blob/main/LICENSE).
+This project is licensed under the [MIT license](./LICENSE).
